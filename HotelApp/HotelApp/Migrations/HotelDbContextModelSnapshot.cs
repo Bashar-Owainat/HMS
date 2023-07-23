@@ -21,6 +21,35 @@ namespace HotelApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("HotelApp.Models.Amenity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Amenities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "AC"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "swimming pool"
+                        });
+                });
+
             modelBuilder.Entity("HotelApp.Models.Hotel", b =>
                 {
                     b.Property<int>("Id")
@@ -35,8 +64,8 @@ namespace HotelApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Phone")
+                        .HasColumnType("int");
 
                     b.Property<string>("city")
                         .HasColumnType("nvarchar(max)");
@@ -50,30 +79,38 @@ namespace HotelApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("hotels");
-                });
 
-            modelBuilder.Entity("HotelApp.Models.HotelRoom", b =>
-                {
-                    b.Property<int>("hotelId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.Property<int>("roomId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(2);
-
-                    b.Property<bool>("petFriendly")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("rate")
-                        .HasColumnType("int");
-
-                    b.Property<int>("roomNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("hotelId", "roomId");
-
-                    b.ToTable("hotelRooms");
+                    b.HasData(
+                        new
+                        {
+                            Id = 16,
+                            Country = "Jordan",
+                            Name = "regency dalas",
+                            Phone = 5469788,
+                            city = "Amman",
+                            state = "Jordan",
+                            streetAddress = "#####"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Country = "Jordan",
+                            Name = "marriott",
+                            Phone = 5469788,
+                            city = "Amman",
+                            state = "Jordan",
+                            streetAddress = "#####"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Country = "Jordan",
+                            Name = "grand haya",
+                            Phone = 5469788,
+                            city = "Amman",
+                            state = "Jordan",
+                            streetAddress = "#####"
+                        });
                 });
 
             modelBuilder.Entity("HotelApp.Models.Room", b =>
@@ -93,6 +130,26 @@ namespace HotelApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("rooms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 16,
+                            Layout = 3,
+                            Name = "red"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Layout = 4,
+                            Name = "blue"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Layout = 5,
+                            Name = "green"
+                        });
                 });
 #pragma warning restore 612, 618
         }

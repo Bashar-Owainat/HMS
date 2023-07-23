@@ -14,9 +14,10 @@ namespace HotelApp
             builder.Services
                .AddDbContext<HotelDbContext>
                (opions => opions.UseSqlServer(ConnectionString));
+            builder.Services.AddControllers();
 
             var app = builder.Build();
-
+            app.MapControllers();   
             app.MapGet("/", () => "Hello World!");
 
             app.Run();
