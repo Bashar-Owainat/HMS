@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelApp.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    [Migration("20230718112934_allow-null-hotel")]
-    partial class allownullhotel
+    [Migration("20230726123901_Hotels")]
+    partial class Hotels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,8 +38,8 @@ namespace HotelApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Phone")
+                        .HasColumnType("int");
 
                     b.Property<string>("city")
                         .HasColumnType("nvarchar(max)");
@@ -52,26 +52,7 @@ namespace HotelApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("hotels");
-                });
-
-            modelBuilder.Entity("HotelApp.Models.Room", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Layout")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("rooms");
+                    b.ToTable("Hotels");
                 });
 #pragma warning restore 612, 618
         }

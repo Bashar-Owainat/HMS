@@ -36,16 +36,16 @@ namespace HotelApp.Models.Services
         {
             _context.Entry(amenity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return (amenity);   
+            return (amenity);
         }
         public async Task DeleteAmenity(int id)
         {
             Amenity amenity = await GetAmenity(id);
-            _context.Entry(amenity).State = EntityState.Deleted;  
-            await _context.SaveChangesAsync();  
+            _context.Entry(amenity).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
 
         }
 
-      
+
     }
 }
