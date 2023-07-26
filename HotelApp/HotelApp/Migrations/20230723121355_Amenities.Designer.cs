@@ -24,7 +24,7 @@ namespace HotelApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HotelApp.Models.Amenity", b =>
+            modelBuilder.Entity("HotelApp.Models.Hotel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

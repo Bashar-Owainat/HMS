@@ -31,15 +31,15 @@ namespace HotelApp.Data
                 );
 
             modelBuilder.Entity<Amenity>().HasData(
-                new Amenity() { Id = 1 , Name = "AC"},
-                new Amenity() { Id = 2, Name = "swimming pool" }
+                new Hotel() { Id = 1 , Name = "AC"},
+                new Hotel() { Id = 2, Name = "swimming pool" }
 
                 );
           
         }
        
-        public DbSet<Hotel> hotels { get; set; }
-        public DbSet<Room> rooms { get; set; }
+        public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<Room> Rooms { get; set; }
         public DbSet<Amenity> Amenities { get; set; }
 
 

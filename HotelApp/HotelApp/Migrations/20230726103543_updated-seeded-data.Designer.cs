@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelApp.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    [Migration("20230723121826_seeding-Hotel")]
-    partial class seedingAmenity
+    [Migration("20230726103543_updated-seeded-data")]
+    partial class updatedseededdata
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace HotelApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HotelApp.Models.Hotel", b =>
+            modelBuilder.Entity("HotelApp.Models.Amenity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace HotelApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("hotels");
+                    b.ToTable("Hotels");
 
                     b.HasData(
                         new
@@ -132,7 +132,7 @@ namespace HotelApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("rooms");
+                    b.ToTable("Rooms");
 
                     b.HasData(
                         new

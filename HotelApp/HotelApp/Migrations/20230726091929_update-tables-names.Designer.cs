@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelApp.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    [Migration("20230723121826_seeding-Hotel")]
-    partial class seedingAmenity
+    [Migration("20230726091929_update-tables-names")]
+    partial class updatetablesnames
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace HotelApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HotelApp.Models.Hotel", b =>
+            modelBuilder.Entity("HotelApp.Models.Amenity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,18 +39,6 @@ namespace HotelApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Amenities");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "AC"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "swimming pool"
-                        });
                 });
 
             modelBuilder.Entity("HotelApp.Models.Hotel", b =>
@@ -81,7 +69,7 @@ namespace HotelApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("hotels");
+                    b.ToTable("Hotels");
 
                     b.HasData(
                         new
@@ -113,6 +101,18 @@ namespace HotelApp.Migrations
                             city = "Amman",
                             state = "Jordan",
                             streetAddress = "#####"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Name = "AC",
+                            Phone = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "swimming pool",
+                            Phone = 0
                         });
                 });
 
@@ -132,7 +132,7 @@ namespace HotelApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("rooms");
+                    b.ToTable("Rooms");
 
                     b.HasData(
                         new

@@ -1,4 +1,6 @@
 using HotelApp.Data;
+using HotelApp.Models.Interfaces;
+using HotelApp.Models.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelApp
@@ -15,6 +17,11 @@ namespace HotelApp
                .AddDbContext<HotelDbContext>
                (opions => opions.UseSqlServer(ConnectionString));
             builder.Services.AddControllers();
+
+            builder.Services.AddTransient<IHotel, HotelServices>();
+            builder.Services.AddTransient<IRoom, RoomServices>();
+            builder.Services.AddTransient<IAmenity, AmenityServices>();
+
 
             var app = builder.Build();
             app.MapControllers();   
