@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HotelApp.Data;
 using HotelApp.Models;
+using HotelApp.Models.Interfaces;
+using HotelApp.Migrations;
 
 namespace HotelApp.Controllers
 {
@@ -14,40 +16,29 @@ namespace HotelApp.Controllers
     [ApiController]
     public class AmenitiesController : ControllerBase
     {
-        private readonly HotelDbContext _context;
+        private readonly IAmenity _amenity;
 
-        public AmenitiesController(HotelDbContext context)
+        public AmenitiesController(IAmenity amenity)
         {
-            _context = context;
+            _amenity = amenity;
         }
 
         // GET: api/Amenities
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Amenity>>> GetAmenities()
         {
-          if (_context.Amenities == null)
-          {
-              return NotFound();
-          }
-            return await _context.Amenities.ToListAsync();
+            var Amenities = await _amenity.GetAmenities();
+            return Amenities;
+
         }
 
         // GET: api/Amenities/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Amenity>> GetAmenity(int id)
         {
-          if (_context.Amenities == null)
-          {
-              return NotFound();
-          }
-            var amenity = await _context.Amenities.FindAsync(id);
-
-            if (amenity == null)
-            {
-                return NotFound();
-            }
-
+            Amenity amenity = await _amenity.GetAmenity(id); 
             return amenity;
+
         }
 
         // PUT: api/Amenities/5
@@ -55,30 +46,8 @@ namespace HotelApp.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAmenity(int id, Amenity amenity)
         {
-            if (id != amenity.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(amenity).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AmenityExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+           Amenity updated = await _amenity.UpdateAmenity(id, amenity);
+            return Ok(updated);
         }
 
         // POST: api/Amenities
@@ -86,39 +55,18 @@ namespace HotelApp.Controllers
         [HttpPost]
         public async Task<ActionResult<Amenity>> PostAmenity(Amenity amenity)
         {
-          if (_context.Amenities == null)
-          {
-              return Problem("Entity set 'HotelDbContext.Amenities'  is null.");
-          }
-            _context.Amenities.Add(amenity);
-            await _context.SaveChangesAsync();
+           await _amenity.CreateAmenity(amenity);
+            return Ok(amenity); 
 
-            return CreatedAtAction("GetAmenity", new { id = amenity.Id }, amenity);
         }
 
         // DELETE: api/Amenities/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAmenity(int id)
         {
-            if (_context.Amenities == null)
-            {
-                return NotFound();
-            }
-            var amenity = await _context.Amenities.FindAsync(id);
-            if (amenity == null)
-            {
-                return NotFound();
-            }
-
-            _context.Amenities.Remove(amenity);
-            await _context.SaveChangesAsync();
-
+            await _amenity.DeleteAmenity(id);
             return NoContent();
         }
 
-        private bool AmenityExists(int id)
-        {
-            return (_context.Amenities?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }

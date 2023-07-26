@@ -78,7 +78,7 @@ namespace HotelApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("hotels");
+                    b.ToTable("Hotels");
 
                     b.HasData(
                         new
@@ -129,7 +129,7 @@ namespace HotelApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("rooms");
+                    b.ToTable("Rooms");
 
                     b.HasData(
                         new
