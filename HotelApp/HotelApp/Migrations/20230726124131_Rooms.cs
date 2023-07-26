@@ -5,24 +5,23 @@
 namespace HotelApp.Migrations
 {
     /// <inheritdoc />
-    public partial class hotelroom : Migration
+    public partial class Rooms : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "hotelRooms",
+                name: "Rooms",
                 columns: table => new
                 {
-                    hotelId = table.Column<int>(type: "int", nullable: false),
-                    roomId = table.Column<int>(type: "int", nullable: false),
-                    roomNumber = table.Column<int>(type: "int", nullable: false),
-                    rate = table.Column<int>(type: "int", nullable: false),
-                    petFriendly = table.Column<bool>(type: "bit", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Layout = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_hotelRooms", x => new { x.hotelId, x.roomId });
+                    table.PrimaryKey("PK_Rooms", x => x.Id);
                 });
         }
 
@@ -30,7 +29,7 @@ namespace HotelApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "hotelRooms");
+                name: "Rooms");
         }
     }
 }

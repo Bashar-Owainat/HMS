@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HotelApp.Data;
 using HotelApp.Models;
 using HotelApp.Models.Interfaces;
-using HotelApp.Migrations;
+
 
 namespace HotelApp.Controllers
 {

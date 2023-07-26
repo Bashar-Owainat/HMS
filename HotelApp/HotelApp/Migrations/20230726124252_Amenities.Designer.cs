@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelApp.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    [Migration("20230723121145_deleted-roomHotel")]
-    partial class deletedroomHotel
+    [Migration("20230726124252_Amenities")]
+    partial class Amenities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,23 @@ namespace HotelApp.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("HotelApp.Models.Amenity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Amenities");
+                });
 
             modelBuilder.Entity("HotelApp.Models.Hotel", b =>
                 {
@@ -52,39 +69,7 @@ namespace HotelApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("hotels");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 16,
-                            Country = "Jordan",
-                            Name = "regency dalas",
-                            Phone = 5469788,
-                            city = "Amman",
-                            state = "Jordan",
-                            streetAddress = "#####"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Country = "Jordan",
-                            Name = "marriott",
-                            Phone = 5469788,
-                            city = "Amman",
-                            state = "Jordan",
-                            streetAddress = "#####"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Country = "Jordan",
-                            Name = "grand haya",
-                            Phone = 5469788,
-                            city = "Amman",
-                            state = "Jordan",
-                            streetAddress = "#####"
-                        });
+                    b.ToTable("Hotels");
                 });
 
             modelBuilder.Entity("HotelApp.Models.Room", b =>
@@ -103,27 +88,7 @@ namespace HotelApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("rooms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 16,
-                            Layout = 3,
-                            Name = "red"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Layout = 4,
-                            Name = "blue"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Layout = 5,
-                            Name = "green"
-                        });
+                    b.ToTable("Rooms");
                 });
 #pragma warning restore 612, 618
         }
