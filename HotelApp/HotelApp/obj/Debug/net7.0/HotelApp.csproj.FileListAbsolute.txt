@@ -246,3 +246,6 @@ C:\Users\b.owainat\source\repos\Async-Inn-d2\HotelApp\HotelApp\obj\Debug\net7.0\
 C:\Users\b.owainat\source\repos\Async-Inn-d2\HotelApp\HotelApp\obj\Debug\net7.0\HotelApp.pdb
 C:\Users\b.owainat\source\repos\Async-Inn-d2\HotelApp\HotelApp\obj\Debug\net7.0\HotelApp.genruntimeconfig.cache
 C:\Users\b.owainat\source\repos\Async-Inn-d2\HotelApp\HotelApp\obj\Debug\net7.0\ref\HotelApp.dll
+C:\Users\b.owainat\source\repos\Async-Inn-d2\HotelApp\HotelApp\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\b.owainat\source\repos\Async-Inn-d2\HotelApp\HotelApp\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\b.owainat\source\repos\Async-Inn-d2\HotelApp\HotelApp\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll

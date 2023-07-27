@@ -17,7 +17,9 @@ namespace HotelApp
                .AddDbContext<HotelDbContext>
                (opions => opions.UseSqlServer(ConnectionString));
             builder.Services.AddControllers();
-
+            builder.Services.AddControllers().AddNewtonsoftJson(options =>
+       options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+     );
             builder.Services.AddTransient<IHotel, HotelServices>();
             builder.Services.AddTransient<IRoom, RoomServices>();
             builder.Services.AddTransient<IAmenity, AmenityServices>();

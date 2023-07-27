@@ -20,14 +20,14 @@ namespace HotelApp.Models.Services
         }
         public async Task<Amenity> GetAmenity(int id)
         {
-            Amenity amenity = await _context.Amenities.FindAsync(id);
+            Amenity amenity = await _context.Amenities.Include(rm => rm.RoomAmenities).ThenInclude(a => a.Amenity).FirstOrDefaultAsync(a => a.Id == id);
             return amenity;
         }
 
 
         public async Task<List<Amenity>> GetAmenities()
         {
-            var amenities = await _context.Amenities.ToListAsync();
+            var amenities = await _context.Amenities.Include(rm => rm.RoomAmenities).ThenInclude(a => a.Amenity).ToListAsync();
             return amenities;
         }
 

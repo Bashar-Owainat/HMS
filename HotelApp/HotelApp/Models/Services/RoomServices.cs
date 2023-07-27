@@ -19,16 +19,16 @@ namespace HotelApp.Models.Services
             return room;
         }
 
-
+        //ThenInclude(r => r.Room)
         public async Task<Room> GetRoom(int id)
         {
-            Room room = await _context.Rooms.FindAsync(id);
+            Room room = await _context.Rooms.Include(rm => rm.RoomAmenities).FirstOrDefaultAsync(r => r.Id == id);
             return room;
         }
 
         public async Task<List<Room>> GetRooms()
         {
-            var rooms = await _context.Rooms.ToListAsync();
+            var rooms = await _context.Rooms.Include(rm => rm.RoomAmenities).ToListAsync();
             return rooms;
         }
 
@@ -42,6 +42,13 @@ namespace HotelApp.Models.Services
         {
             Room room = await GetRoom(id);
             _context.Entry(room).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddAmenityToRoom(int roomId, int amenityId)
+        {
+            RoomAmenity roomAmenity = new RoomAmenity { AmenityId = amenityId, RoomId= roomId }; 
+            _context.Entry(roomAmenity).State = EntityState.Added;
             await _context.SaveChangesAsync();
         }
     }

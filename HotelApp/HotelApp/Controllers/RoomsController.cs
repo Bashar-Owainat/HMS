@@ -64,5 +64,12 @@ namespace HotelApp.Controllers
             return NoContent();
         }
 
+        [HttpPost]
+        [Route("{roomId}/Amenity/{amenityId}")]
+        public async Task<ActionResult> PostAmenityIntoRoom(int roomId, int amenityId)
+        {
+          await  _room.AddAmenityToRoom(roomId, amenityId);
+            return Ok();
+        }
     }
 }
