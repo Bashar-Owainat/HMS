@@ -23,7 +23,7 @@ namespace HotelApp
             builder.Services.AddTransient<IHotel, HotelServices>();
             builder.Services.AddTransient<IRoom, RoomServices>();
             builder.Services.AddTransient<IAmenity, AmenityServices>();
-
+            //here add for hotelRoom
 
             var app = builder.Build();
             app.MapControllers();   

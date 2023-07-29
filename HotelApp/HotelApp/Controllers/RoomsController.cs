@@ -71,5 +71,13 @@ namespace HotelApp.Controllers
           await  _room.AddAmenityToRoom(roomId, amenityId);
             return Ok();
         }
+
+        [HttpDelete]
+        [Route("{roomId}/Amenity/{amenityId}")]
+        public async Task<ActionResult> DeleteAmentityFromRoom(int roomId, int amenityId)
+        {
+           await  _room.RemoveAmentityFromRoom(roomId, amenityId);
+            return NoContent();
+        }
     }
 }

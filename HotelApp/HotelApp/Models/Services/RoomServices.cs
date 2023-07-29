@@ -51,5 +51,12 @@ namespace HotelApp.Models.Services
             _context.Entry(roomAmenity).State = EntityState.Added;
             await _context.SaveChangesAsync();
         }
+
+        public async Task RemoveAmentityFromRoom(int roomId, int amenityId)
+        {
+            var roomAmenity = await _context.RoomAmenities.FirstOrDefaultAsync(rm => rm.RoomId == roomId && rm.AmenityId == amenityId);
+            _context.Entry(roomAmenity).State= EntityState.Deleted;
+            await _context.SaveChangesAsync();
+        }
     }
 }
