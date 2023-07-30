@@ -23,7 +23,8 @@ namespace HotelApp.Models.Services
 
         public async Task<List<HotelRoom>> GetRooms(int hotelId)
         {
-            var rooms = await _context.HotelRooms.Where(hr => hr.HotelId == hotelId).ToListAsync();
+            //var rooms = await _context.HotelRooms.Where(hr => hr.HotelId == hotelId).ToListAsync();
+            var rooms = await _context.HotelRooms.ToListAsync();
             return rooms;
         }
       
