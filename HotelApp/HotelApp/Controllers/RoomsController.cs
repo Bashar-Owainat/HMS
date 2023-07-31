@@ -48,11 +48,11 @@ namespace HotelApp.Controllers
 
         // POST: api/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Room>> PostRoom(Room room)
+        [HttpPost("{name}/rooms/{layout}")]
+        public async Task<ActionResult<Room>> PostRoom(string name, int layout)
         {
-            await _room.CreateRoom(room);
-            return room;
+            await _room.CreateRoom( name,  layout);
+            return Ok();
         }
 
         // DELETE: api/Rooms/5

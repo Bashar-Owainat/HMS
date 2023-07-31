@@ -2,7 +2,7 @@
 {
     public interface IRoom
     {
-        Task<Room> CreateRoom(Room room);
+        Task<Room> CreateRoom(string name, int layout);
         Task<List<Room>> GetRooms();
 
         Task<Room> GetRoom(int id);

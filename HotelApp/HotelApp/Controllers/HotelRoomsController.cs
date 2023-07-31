@@ -30,7 +30,7 @@ namespace HotelApp.Controllers
             return rooms;
         }
 
-        // GET: api/HotelRooms/5
+       
         [HttpGet("{hotelId}/Rooms/{roomId}")]
         public async Task<ActionResult<HotelRoom>> GetHotelRoom(int hotelId, int roomId)
         {
@@ -50,9 +50,9 @@ namespace HotelApp.Controllers
         // POST: api/HotelRooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("{hotelId}/Rooms")]
-        public async Task<ActionResult<HotelRoom>>  PostRoomIntoHotel(int RoomId, int HotelId)
+        public async Task<ActionResult<HotelRoom>>  PostRoomIntoHotel(int hotelId, HotelRoom hotelRoom)
         {
-            HotelRoom room = await _hotelRoom.AddRoomToHotel(RoomId, HotelId);
+            HotelRoom room = await _hotelRoom.AddRoomToHotel(hotelId, hotelRoom);
             return room;
         }
 

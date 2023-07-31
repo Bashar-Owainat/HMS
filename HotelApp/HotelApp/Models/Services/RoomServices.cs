@@ -12,11 +12,12 @@ namespace HotelApp.Models.Services
         {
             _context = context;
         }
-        public async Task<Room> CreateRoom(Room room)
+        public async Task<Room> CreateRoom(string name, int layout)
         {
-            _context.Entry(room).State = EntityState.Added;
+            Room newRoom = new Room { Layout = layout , Name = name};
+            _context.Entry<Room>(newRoom).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return room;
+            return newRoom;
         }
 
         //ThenInclude(r => r.Room)

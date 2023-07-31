@@ -44,9 +44,9 @@ namespace HotelApp.Data
                 );
 
             modelBuilder.Entity<HotelRoom>().HasData(
-                new HotelRoom() { HotelId=1, RoomId=1},
-                new HotelRoom() { HotelId = 1, RoomId = 2 },
-                new HotelRoom() { HotelId = 2, RoomId = 3 }
+                new HotelRoom() { HotelId = 1, RoomId = 1, PetFriendly = true, RoomNumber = 111, Rate = 3},
+                new HotelRoom() { HotelId = 1, RoomId = 2, PetFriendly = false, RoomNumber = 222, Rate = 4 },
+                new HotelRoom() { HotelId = 2, RoomId = 3 , PetFriendly = true, RoomNumber = 333, Rate = 5 }
 
                 );
         }

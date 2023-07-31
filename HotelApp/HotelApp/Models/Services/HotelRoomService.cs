@@ -23,8 +23,8 @@ namespace HotelApp.Models.Services
 
         public async Task<List<HotelRoom>> GetRooms(int hotelId)
         {
-            //var rooms = await _context.HotelRooms.Where(hr => hr.HotelId == hotelId).ToListAsync();
-            var rooms = await _context.HotelRooms.ToListAsync();
+            
+            var rooms = await _context.HotelRooms.Where(hr => hr.HotelId == hotelId).Include(hr => hr.Room).ThenInclude(r => r.RoomAmenities ).ToListAsync();
             return rooms;
         }
       
@@ -33,30 +33,32 @@ namespace HotelApp.Models.Services
         public async Task<HotelRoom> UpdateRoom(int hotelId, int roomId, HotelRoom room)
         {
             HotelRoom hotelRoom = await GetRoom(hotelId, roomId);
-            _context.Entry(hotelRoom).State= EntityState.Modified;
+            
+            _context.Entry<HotelRoom>(room).State= EntityState.Modified;
             await _context.SaveChangesAsync();
             return hotelRoom;
         }
         public async Task DeleteRoom(int hotelId, int roomId)
         {
             HotelRoom hotelRoom = await GetRoom(hotelId, roomId);
-            _context.Entry(hotelRoom).State = EntityState.Deleted;
+            _context.Entry<HotelRoom>(hotelRoom).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
 
         }
-        public async Task<HotelRoom> AddRoomToHotel(int roomId, int hotelId)
+        public async Task<HotelRoom> AddRoomToHotel(int hotelId, HotelRoom hotelRoom)
         {
-            var room = await _context.HotelRooms.FirstOrDefaultAsync(rm => rm.HotelId == hotelId && rm.RoomId == roomId);
-            _context.Entry(room).State = EntityState.Added;
+           
+            _context.Entry<HotelRoom>(hotelRoom).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return room;
+            return hotelRoom;
         }
+
 
 
         public async Task RemoveRoomFromHotel(int roomId, int hotelId)
         {
             var room = await _context.HotelRooms.FirstOrDefaultAsync(rm => rm.HotelId == hotelId && rm.RoomId == roomId);
-            _context.Entry(room).State = EntityState.Deleted;
+            _context.Entry<HotelRoom>(room).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
             
         }
