@@ -32,11 +32,9 @@ namespace HotelApp.Models.Services
 
         public async Task<HotelRoom> UpdateRoom(int hotelId, int roomId, HotelRoom room)
         {
-            HotelRoom hotelRoom = await GetRoom(hotelId, roomId);
-            
             _context.Entry<HotelRoom>(room).State= EntityState.Modified;
             await _context.SaveChangesAsync();
-            return hotelRoom;
+            return room;
         }
         public async Task DeleteRoom(int hotelId, int roomId)
         {
