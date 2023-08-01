@@ -1,5 +1,5 @@
 ﻿using HotelApp.Data;
-
+using HotelApp.Models.DTOs;
 using HotelApp.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,7 +36,9 @@ namespace HotelApp.Models.Services
 
         public async Task<List<Hotel>> GetHotels()
         {
-           var Courses = await _context.Hotels.ToListAsync();
+           var Courses = await _context.Hotels.Include(h=> h.HotelRooms)
+                                              .ThenInclude(hr=>hr.Room)
+                                               .ToListAsync();
             return Courses; 
         }
 

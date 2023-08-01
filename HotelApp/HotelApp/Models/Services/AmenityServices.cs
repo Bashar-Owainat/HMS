@@ -1,4 +1,5 @@
 ﻿using HotelApp.Data;
+using HotelApp.Models.DTOs;
 using HotelApp.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,27 +8,31 @@ namespace HotelApp.Models.Services
     public class AmenityServices : IAmenity
     {
         private readonly HotelDbContext _context;
-
-        public AmenityServices(HotelDbContext context)
+        private IRoom _room;
+        public AmenityServices(HotelDbContext context, IRoom room)
         {
             _context = context;
+            _room = room;
         }
-        public async Task<Amenity> CreateAmenity(Amenity amenity)
+        public async Task<Amenity> CreateAmenity(AmenityDTO amenity)
         {
-            _context.Entry(amenity).State = EntityState.Added;
+            Amenity newAmenity = new Amenity { Name = amenity.Name };
+            _context.Entry(newAmenity).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return amenity;
+
+            return newAmenity;
         }
-        public async Task<Amenity> GetAmenity(int id)
+        public async Task<AmenityDTO> GetAmenity(int id)
         {
-            Amenity amenity = await _context.Amenities.Include(rm => rm.RoomAmenities).ThenInclude(a => a.Amenity).FirstOrDefaultAsync(a => a.Id == id);
-            return amenity;
+            Amenity? amenity = await _context.Amenities.FirstOrDefaultAsync(a => a.Id == id);
+            AmenityDTO amenityDTO = new AmenityDTO { ID = amenity.Id, Name = amenity.Name};
+            return amenityDTO;
         }
 
 
         public async Task<List<Amenity>> GetAmenities()
         {
-            var amenities = await _context.Amenities.Include(rm => rm.RoomAmenities).ThenInclude(a => a.Amenity).ToListAsync();
+            var amenities = await _context.Amenities.Include(rm => rm.RoomAmenities).ToListAsync();
             return amenities;
         }
 
@@ -40,7 +45,7 @@ namespace HotelApp.Models.Services
         }
         public async Task DeleteAmenity(int id)
         {
-            Amenity amenity = await GetAmenity(id);
+            AmenityDTO amenity = await GetAmenity(id);
             _context.Entry(amenity).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
 

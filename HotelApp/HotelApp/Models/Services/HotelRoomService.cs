@@ -15,9 +15,9 @@ namespace HotelApp.Models.Services
         }
 
 
-        public async Task<HotelRoom> GetRoom(int hotelId, int roomId )
+        public async Task<HotelRoom> GetRoom(int hotelId, int roomNumber )
         {
-            var hotelRoom = await _context.HotelRooms.Include(hr=> hr.Room).FirstOrDefaultAsync(hr=> hr.RoomId== roomId && hr.HotelId == hotelId);
+            var hotelRoom = await _context.HotelRooms.Include(hr=> hr.Room).FirstOrDefaultAsync(hr=> hr.RoomNumber== roomNumber && hr.HotelId == hotelId);
             return hotelRoom;
         }
 
