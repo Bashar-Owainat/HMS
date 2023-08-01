@@ -7,7 +7,7 @@ namespace HotelApp.Models.Services
     public class RoomServices : IRoom
     {
         private readonly HotelDbContext _context;
-
+       
         public RoomServices(HotelDbContext context)
         {
             _context = context;

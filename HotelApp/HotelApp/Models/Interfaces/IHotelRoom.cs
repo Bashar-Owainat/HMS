@@ -4,7 +4,7 @@ namespace HotelApp.Models.Interfaces
 {
     public interface IHotelRoom
     {
-        Task<HotelRoom> GetRoom(int hotelId, int roomId);
+        Task<HotelRoom> GetRoom(int hotelId, int roomNumber);
         Task<List<HotelRoom>> GetRooms(int hotelId);
 
         Task<HotelRoom> UpdateRoom(int hotelId, int roomId, HotelRoom room);

@@ -31,10 +31,10 @@ namespace HotelApp.Controllers
         }
 
        
-        [HttpGet("{hotelId}/Rooms/{roomId}")]
-        public async Task<ActionResult<HotelRoom>> GetHotelRoom(int hotelId, int roomId)
+        [HttpGet("{hotelId}/Rooms/{roomNumber}")]
+        public async Task<ActionResult<HotelRoom>> GetHotelRoom(int hotelId, int roomNumber)
         {
-            HotelRoom hotelRoom = await _hotelRoom.GetRoom(hotelId, roomId); 
+            HotelRoom hotelRoom = await _hotelRoom.GetRoom(hotelId, roomNumber); 
             return hotelRoom;
         }
 

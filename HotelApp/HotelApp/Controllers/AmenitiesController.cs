@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HotelApp.Data;
 using HotelApp.Models;
 using HotelApp.Models.Interfaces;
-
+using HotelApp.Models.DTOs;
 
 namespace HotelApp.Controllers
 {
@@ -34,9 +34,9 @@ namespace HotelApp.Controllers
 
         // GET: api/Amenities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Amenity>> GetAmenity(int id)
+        public async Task<ActionResult<AmenityDTO>> GetAmenity(int id)
         {
-            Amenity amenity = await _amenity.GetAmenity(id); 
+            AmenityDTO amenity = await _amenity.GetAmenity(id); 
             return amenity;
 
         }
@@ -53,7 +53,7 @@ namespace HotelApp.Controllers
         // POST: api/Amenities
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Amenity>> PostAmenity(Amenity amenity)
+        public async Task<ActionResult<Amenity>> PostAmenity(AmenityDTO amenity)
         {
            await _amenity.CreateAmenity(amenity);
             return Ok(amenity); 
