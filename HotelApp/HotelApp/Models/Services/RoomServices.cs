@@ -24,20 +24,9 @@ namespace HotelApp.Models.Services
 
         public async Task<RoomDTO> GetRoom(int id)
         {
-            Room? room = await _context.Rooms.Include(rm => rm.RoomAmenities).ThenInclude(X => X.Amenity1).FirstOrDefaultAsync(r => r.Id == id);
+            Room? room = await _context.Rooms.Include(rm => rm.RoomAmenities).ThenInclude(X => X.Amenity).FirstOrDefaultAsync(r => r.Id == id);
 
-            //RoomDTO? roomDTO = new RoomDTO
-            //{
-
-            //    ID = room.Id,
-            //    Name = room.Name,
-            //    Layout = room.Layout,
-            //    Amenities = room.RoomAmenities.Select(rm => new AmenityDTO
-            //    {
-            //        ID = rm.AmenityId,
-            //        Name = rm.Amenity.Name
-            //    }).ToList()
-            //};
+           
        
             RoomDTO? roomDTO = new RoomDTO
             {
@@ -48,7 +37,7 @@ namespace HotelApp.Models.Services
                 Amenities = room.RoomAmenities.Select(rm => new AmenityDTO
                 {
                         ID = rm.AmenityId,
-                    Name = rm.Amenity1?.Name
+                    Name = rm.Amenity?.Name
 
                 }).ToList()
                 };
@@ -56,8 +45,7 @@ namespace HotelApp.Models.Services
 
             return roomDTO;
 
-            //Room room = await _context.Rooms.Include(rm => rm.RoomAmenities).FirstOrDefaultAsync(r => r.Id == id);
-            //return room;
+            
         }
 
         public async Task<List<Room>> GetRooms()

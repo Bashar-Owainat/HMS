@@ -10,6 +10,6 @@ namespace HotelApp.Models
         public int RoomId { get; set; }
 
         public Room? Room { get; set; }
-        public Amenity? Amenity1 { get; set; }
+        public Amenity? Amenity { get; set; }
     }
 }
