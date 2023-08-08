@@ -61,13 +61,24 @@ namespace HotelApp
                 app.UseSwaggerUI();
             }
 
-            app.UseSwaggerUI(options =>
+            //app.UseSwaggerUI(options =>
+            //{
+            //    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+            //    options.RoutePrefix = string.Empty;
+            //});
+
+            app.UseSwagger(aptions =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-                options.RoutePrefix = string.Empty;
+                aptions.RouteTemplate = "/api/{documentName}/swagger.json";
             });
 
-          
+            app.UseSwaggerUI(aptions =>
+            {
+                aptions.SwaggerEndpoint("/api/v1/swagger.json", "School API");
+                aptions.RoutePrefix = "docs";
+            });
+
+
             app.MapGet("/", () => "Hello World!");
 
             app.MapControllers();
