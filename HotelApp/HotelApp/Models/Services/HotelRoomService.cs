@@ -1,5 +1,5 @@
 ﻿using HotelApp.Data;
-using HotelApp.Migrations;
+//using HotelApp.Migrations;
 using HotelApp.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
