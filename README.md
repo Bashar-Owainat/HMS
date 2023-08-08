@@ -1,5 +1,10 @@
 # Async-Inn-d2
-Hotel management system
+## Hotel management system
+An ASP.NET core web api app that manages hotels.
+The app has been created using these technologies/techniques:
+
+Entity framework, repository design pattern, dependency injection, DTOs, Identity for Authentication, Azure and microsoft sql database.
+
 
 You can visit my web api here:
 https://hotelapp20230808164118.azurewebsites.net/docs/index.html
