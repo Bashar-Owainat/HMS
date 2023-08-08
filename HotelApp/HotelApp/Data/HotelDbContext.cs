@@ -1,17 +1,18 @@
 ﻿using HotelApp.Models;
-using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelApp.Data
 {
-    public class HotelDbContext : DbContext
-    {
+    public class HotelDbContext : IdentityDbContext<AppUser>
+    {  
         public HotelDbContext(DbContextOptions options):base(options)
         {
                 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<RoomAmenity>().HasKey(r => new { r.AmenityId, r.RoomId });
             modelBuilder.Entity<HotelRoom>().HasKey(hr => new { hr.HotelId, hr.RoomId });
 

@@ -1,4 +1,4 @@
-﻿using HotelApp.Migrations;
+﻿//using HotelApp.Migrations;
 
 namespace HotelApp.Models.Interfaces
 {

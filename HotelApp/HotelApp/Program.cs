@@ -1,6 +1,8 @@
 using HotelApp.Data;
+using HotelApp.Models;
 using HotelApp.Models.Interfaces;
 using HotelApp.Models.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -17,10 +19,21 @@ namespace HotelApp
             builder.Services
                .AddDbContext<HotelDbContext>
                (opions => opions.UseSqlServer(ConnectionString));
+
             builder.Services.AddControllers();
+
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
      );
+
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                
+            })
+ .AddEntityFrameworkStores<HotelDbContext>();
+
+            builder.Services.AddTransient<IUser, IdentityUserService>();
             builder.Services.AddTransient<IHotel, HotelServices>();
             builder.Services.AddTransient<IRoom, RoomServices>();
             builder.Services.AddTransient<IAmenity, AmenityServices>();
@@ -41,7 +54,6 @@ namespace HotelApp
                 });
             });
             var app = builder.Build();
-            app.MapControllers();
 
             if (app.Environment.IsDevelopment())
             {
@@ -57,6 +69,8 @@ namespace HotelApp
 
           
             app.MapGet("/", () => "Hello World!");
+
+            app.MapControllers();
 
             app.Run();
         }
