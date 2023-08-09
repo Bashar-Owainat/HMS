@@ -61,11 +61,7 @@ namespace HotelApp
                 app.UseSwaggerUI();
             }
 
-            //app.UseSwaggerUI(options =>
-            //{
-            //    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-            //    options.RoutePrefix = string.Empty;
-            //});
+           
 
             app.UseSwagger(aptions =>
             {
@@ -74,7 +70,7 @@ namespace HotelApp
 
             app.UseSwaggerUI(aptions =>
             {
-                aptions.SwaggerEndpoint("/api/v1/swagger.json", "School API");
+                aptions.SwaggerEndpoint("/api/v1/swagger.json", "Hotels API");
                 aptions.RoutePrefix = "docs";
             });
 
