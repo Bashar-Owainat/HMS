@@ -1,4 +1,5 @@
 ﻿using HotelApp.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,7 @@ namespace HotelApp.Data
     {  
         public HotelDbContext(DbContextOptions options):base(options)
         {
-                
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,11 +46,41 @@ namespace HotelApp.Data
                 );
 
             modelBuilder.Entity<HotelRoom>().HasData(
-                new HotelRoom() { HotelId = 1, RoomId = 1, PetFriendly = true, RoomNumber = 111, Rate = 3},
+                new HotelRoom() { HotelId = 1, RoomId = 1, PetFriendly = true, RoomNumber = 111, Rate = 3 },
                 new HotelRoom() { HotelId = 1, RoomId = 2, PetFriendly = false, RoomNumber = 222, Rate = 4 },
-                new HotelRoom() { HotelId = 2, RoomId = 3 , PetFriendly = true, RoomNumber = 333, Rate = 5 }
+                new HotelRoom() { HotelId = 2, RoomId = 3, PetFriendly = true, RoomNumber = 333, Rate = 5 }
 
                 );
+
+            SeedRole(modelBuilder, "DistrictManager", "create", "read", "update", "delete");
+            SeedRole(modelBuilder, "PropertyManager", "create", "read", "update");
+            SeedRole(modelBuilder, "Agent", "create", "read", "update", "delete");
+            SeedRole(modelBuilder, "Anonymous",  "read");
+        }
+        int nextId = 1;
+        private void SeedRole(ModelBuilder modelBuilder, string roleName, params string[] permissions)
+        {
+            var role = new IdentityRole
+            {
+                Id = roleName.ToLower(),
+                Name = roleName,
+                NormalizedName = roleName.ToUpper(),
+                ConcurrencyStamp = Guid.Empty.ToString()
+            };
+
+            modelBuilder.Entity<IdentityRole>().HasData(role);
+
+           
+            var roleClaims = permissions.Select(permission =>
+              new IdentityRoleClaim<string>
+              {
+                  Id = nextId++,
+                  RoleId = role.Id,
+                  ClaimType = "permissions", 
+                  ClaimValue = permission
+              }).ToArray();
+
+            modelBuilder.Entity<IdentityRoleClaim<string>>().HasData(roleClaims);
         }
 
         public DbSet<Hotel> Hotels { get; set; }

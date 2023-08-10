@@ -1,5 +1,6 @@
 ﻿using HotelApp.Models.DTOs;
 using HotelApp.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -41,5 +42,13 @@ namespace HotelApp.Controllers
             }
             return user;
         }
+       
+        [Authorize]
+        [HttpGet("Profile")]
+        public async Task<ActionResult<UserDto>> Profile()
+        {
+            return await _user.GetUser(this.User); ;
+        }
+
     }
 }
