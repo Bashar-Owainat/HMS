@@ -2,6 +2,7 @@ using HotelApp.Data;
 using HotelApp.Models;
 using HotelApp.Models.Interfaces;
 using HotelApp.Models.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -14,7 +15,7 @@ namespace HotelApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            string ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            string? ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             builder.Services
                .AddDbContext<HotelDbContext>
@@ -38,8 +39,28 @@ namespace HotelApp
             builder.Services.AddTransient<IRoom, RoomServices>();
             builder.Services.AddTransient<IAmenity, AmenityServices>();
             builder.Services.AddTransient<IHotelRoom, HotelRoomService>();
+            builder.Services.AddScoped<JwtTokenService>();
 
-            //here add for hotelRoom
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                
+                options.TokenValidationParameters = JwtTokenService.GetValidationPerameters(builder.Configuration);
+            });
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("create", policy => policy.RequireClaim("permissions", "create"));
+                options.AddPolicy("read", policy => policy.RequireClaim("permissions", "read"));
+                options.AddPolicy("update", policy => policy.RequireClaim("permissions", "update"));
+                options.AddPolicy("delete", policy => policy.RequireClaim("permissions", "delete"));
+
+            });
+            builder.Services.AddAuthorization();
+            
 
             builder.Services.AddSwaggerGen();
 
@@ -55,13 +76,15 @@ namespace HotelApp
             });
             var app = builder.Build();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
-           
 
             app.UseSwagger(aptions =>
             {
@@ -75,7 +98,7 @@ namespace HotelApp
             });
 
 
-            app.MapGet("/", () => "Hello World!");
+            app.MapGet("/index.html", () => "Hello World!");
 
             app.MapControllers();
 

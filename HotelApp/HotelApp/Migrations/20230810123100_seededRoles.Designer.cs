@@ -4,6 +4,7 @@ using HotelApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelApp.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    partial class HotelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230810123100_seededRoles")]
+    partial class seededRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -333,17 +336,17 @@ namespace HotelApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "districtmanager",
+                            Id = "district manager",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
-                            Name = "DistrictManager",
-                            NormalizedName = "DISTRICTMANAGER"
+                            Name = "District Manager",
+                            NormalizedName = "DISTRICT MANAGER"
                         },
                         new
                         {
-                            Id = "propertymanager",
+                            Id = "property manage",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
-                            Name = "PropertyManager",
-                            NormalizedName = "PROPERTYMANAGER"
+                            Name = "Property Manage",
+                            NormalizedName = "PROPERTY MANAGE"
                         },
                         new
                         {
@@ -391,49 +394,49 @@ namespace HotelApp.Migrations
                             Id = 13,
                             ClaimType = "permissions",
                             ClaimValue = "create",
-                            RoleId = "districtmanager"
+                            RoleId = "district manager"
                         },
                         new
                         {
                             Id = 14,
                             ClaimType = "permissions",
                             ClaimValue = "read",
-                            RoleId = "districtmanager"
+                            RoleId = "district manager"
                         },
                         new
                         {
                             Id = 15,
                             ClaimType = "permissions",
                             ClaimValue = "update",
-                            RoleId = "districtmanager"
+                            RoleId = "district manager"
                         },
                         new
                         {
                             Id = 16,
                             ClaimType = "permissions",
                             ClaimValue = "delete",
-                            RoleId = "districtmanager"
+                            RoleId = "district manager"
                         },
                         new
                         {
                             Id = 17,
                             ClaimType = "permissions",
                             ClaimValue = "create",
-                            RoleId = "propertymanager"
+                            RoleId = "property manage"
                         },
                         new
                         {
                             Id = 18,
                             ClaimType = "permissions",
                             ClaimValue = "read",
-                            RoleId = "propertymanager"
+                            RoleId = "property manage"
                         },
                         new
                         {
                             Id = 19,
                             ClaimType = "permissions",
                             ClaimValue = "update",
-                            RoleId = "propertymanager"
+                            RoleId = "property manage"
                         },
                         new
                         {

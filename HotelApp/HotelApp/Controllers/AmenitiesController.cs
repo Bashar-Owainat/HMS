@@ -9,6 +9,8 @@ using HotelApp.Data;
 using HotelApp.Models;
 using HotelApp.Models.Interfaces;
 using HotelApp.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HotelApp.Controllers
 {
@@ -52,6 +54,8 @@ namespace HotelApp.Controllers
 
         // POST: api/Amenities
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[Authorize(Roles = "PropertyManager")]
+        [Authorize(Roles = "DistrictManager,PropertyManager")]
         [HttpPost]
         public async Task<ActionResult<Amenity>> PostAmenity(AmenityDTO amenity)
         {
