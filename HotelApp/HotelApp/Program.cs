@@ -34,12 +34,15 @@ namespace HotelApp
             })
  .AddEntityFrameworkStores<HotelDbContext>();
 
-            builder.Services.AddTransient<IUser, IdentityUserService>();
-            builder.Services.AddTransient<IHotel, HotelServices>();
-            builder.Services.AddTransient<IRoom, RoomServices>();
-            builder.Services.AddTransient<IAmenity, AmenityServices>();
-            builder.Services.AddTransient<IHotelRoom, HotelRoomService>();
+            //builder.Services.AddTransient<IHotel, HotelServices>();
+            //builder.Services.AddTransient<IRoom, RoomServices>();
+            //builder.Services.AddTransient<IAmenity, AmenityServices>();
+            //builder.Services.AddTransient<IHotelRoom, HotelRoomService>();
+            builder.Services.AddTransient<IGenericRepo<Room>, GenericRepo<Room>>();
+            builder.Services.AddTransient<IGenericRepo<Hotel>, GenericRepo<Hotel>>();
+            builder.Services.AddTransient<IGenericRepo<Amenity>, GenericRepo<Amenity>>();
             builder.Services.AddScoped<JwtTokenService>();
+            builder.Services.AddTransient<IUser, IdentityUserService>();
 
             builder.Services.AddAuthentication(options =>
             {
