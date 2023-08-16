@@ -18,16 +18,17 @@ namespace HotelApp.Models.Services
         }
        
 
-        public virtual async Task<IEnumerable<TEntity>> GetAll()
+        public virtual async Task<List<TEntity>> GetAll()
         {
             var list = await dbSet.ToListAsync();
             await _context.SaveChangesAsync();
             return list;
         }
 
-        public TEntity GetById(object id)
+        public async Task<TEntity> GetById(object id)
         {
-            return dbSet.Find(id);
+            var room = await dbSet.FindAsync(id);
+            return room;
         }
 
         public async Task<TEntity> Insert(TEntity obj)
@@ -37,16 +38,18 @@ namespace HotelApp.Models.Services
             return obj; 
         }
 
-        public TEntity Update(TEntity entityToUpdate)
+        public async Task<TEntity> Update(object id, TEntity entityToUpdate)
         {
             _context.Entry(entityToUpdate).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
             return entityToUpdate;
         }
 
-        public void Delete(object id)
+        public async Task Delete(object id)
         {
-            var entityToDelete = dbSet.Find(id);
+            var entityToDelete = await dbSet.FindAsync(id);
             dbSet.Remove(entityToDelete);
+            await _context.SaveChangesAsync();
         }
     }
 }
