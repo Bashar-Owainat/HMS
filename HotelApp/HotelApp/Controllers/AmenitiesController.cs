@@ -29,7 +29,7 @@ namespace HotelApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Amenity>>> GetAmenities()
         {
-            var Amenities = await _amenity.GetAmenities();
+            var Amenities = await _amenity.GetAll();
             return Amenities;
 
         }
@@ -38,8 +38,9 @@ namespace HotelApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AmenityDTO>> GetAmenity(int id)
         {
-            AmenityDTO amenity = await _amenity.GetAmenity(id); 
-            return amenity;
+            Amenity amenity = await _amenity.GetById(id);
+            AmenityDTO dto = new AmenityDTO { ID = amenity.Id, Name = amenity.Name };
+            return dto;
 
         }
 
@@ -48,18 +49,18 @@ namespace HotelApp.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAmenity(int id, Amenity amenity)
         {
-           Amenity updated = await _amenity.UpdateAmenity(id, amenity);
+           Amenity updated = await _amenity.Update(id, amenity);
             return Ok(updated);
         }
 
         // POST: api/Amenities
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[Authorize(Roles = "PropertyManager")]
-        [Authorize(Roles = "DistrictManager,PropertyManager")]
         [HttpPost]
-        public async Task<ActionResult<Amenity>> PostAmenity(AmenityDTO amenity)
+        [Authorize(Roles = "DistrictManager,PropertyManager")]
+        public async Task<ActionResult<Amenity>> PostAmenity(Amenity amenity)
         {
-           await _amenity.CreateAmenity(amenity);
+           await _amenity.Insert(amenity);
             return Ok(amenity); 
 
         }
@@ -68,7 +69,7 @@ namespace HotelApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAmenity(int id)
         {
-            await _amenity.DeleteAmenity(id);
+            await _amenity.Delete(id);
             return NoContent();
         }
 

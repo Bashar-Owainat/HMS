@@ -19,8 +19,8 @@ namespace HotelApp.Controllers
     [ApiController]
     public class RoomsController : ControllerBase
     {
-        private readonly IGenericRepo<Room> _room;
-        public RoomsController(IGenericRepo<Room> room)
+        private readonly IRoom _room;
+        public RoomsController(IRoom room)
         {
             _room = room;
         }
@@ -77,20 +77,20 @@ namespace HotelApp.Controllers
             return NoContent();
         }
 
-        //[HttpPost]
-        //[Route("{roomId}/Amenity/{amenityId}")]
-        //public async Task<ActionResult> PostAmenityIntoRoom(int roomId, int amenityId)
-        //{
-        //  await  _room.AddAmenityToRoom(roomId, amenityId);
-        //    return Ok();
-        //}
+        [HttpPost]
+        [Route("{roomId}/Amenity/{amenityId}")]
+        public async Task<ActionResult> PostAmenityIntoRoom(int roomId, int amenityId)
+        {
+            await _room.AddAmenityToRoom(roomId, amenityId);
+            return Ok();
+        }
 
-        //[HttpDelete]
-        //[Route("{roomId}/Amenity/{amenityId}")]
-        //public async Task<ActionResult> DeleteAmentityFromRoom(int roomId, int amenityId)
-        //{
-        //   await  _room.RemoveAmentityFromRoom(roomId, amenityId);
-        //    return NoContent();
-        //}
+        [HttpDelete]
+        [Route("{roomId}/Amenity/{amenityId}")]
+        public async Task<ActionResult> DeleteAmentityFromRoom(int roomId, int amenityId)
+        {
+            await _room.RemoveAmentityFromRoom(roomId, amenityId);
+            return NoContent();
+        }
     }
 }

@@ -52,6 +52,7 @@ namespace HotelApp.Data
 
                 );
 
+
             SeedRole(modelBuilder, "DistrictManager", "create", "read", "update", "delete");
             SeedRole(modelBuilder, "PropertyManager", "create", "read", "update");
             SeedRole(modelBuilder, "Agent", "create", "read", "update", "delete");
