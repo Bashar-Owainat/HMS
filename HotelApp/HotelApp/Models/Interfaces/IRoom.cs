@@ -2,15 +2,15 @@
 
 namespace HotelApp.Models.Interfaces
 {
-    public interface IRoom
+    public interface IRoom : IGenericRepo<Room>
     {
-        Task<Room> CreateRoom(string name, int layout);
-        Task<List<Room>> GetRooms();
+        //Task<Room> CreateRoom(Room room);
+        //Task<List<Room>> GetRooms();
 
-        Task<RoomDTO> GetRoom(int id);
-        Task<Room> UpdateRoom(int id, Room room);
+        //Task<RoomDTO> GetRoom(int id);
+        //Task<Room> UpdateRoom(int id, Room room);
 
-        Task DeleteRoom(int id);
+        //Task DeleteRoom(int id);
 
         Task AddAmenityToRoom(int roomId, int amenityId);
         Task RemoveAmentityFromRoom(int roomId, int amenityId);

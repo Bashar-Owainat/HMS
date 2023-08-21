@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HotelApp.Data;
 using HotelApp.Models;
 using HotelApp.Models.Interfaces;
 using HotelApp.Models.DTOs;
+using HotelApp.Migrations;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Writers;
 
 namespace HotelApp.Controllers
 {
@@ -24,9 +27,9 @@ namespace HotelApp.Controllers
 
         // GET: api/Rooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> Getrooms()
+        public async Task<List<Room>> GetRooms()
         {
-            var rooms = await _room.GetRooms();
+          var rooms = await _room.GetAll();
             return rooms;
         }
 
@@ -34,8 +37,17 @@ namespace HotelApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<RoomDTO>> GetRoom(int id)
         {
-            RoomDTO room = await _room.GetRoom(id); 
-            return room;
+            Room room = await _room.GetById(id);
+
+            RoomDTO? roomDTO = new RoomDTO
+            {
+
+                ID = room.Id,
+                Name = room.Name,
+                Layout = room.Layout,
+               
+            };
+            return roomDTO;
         }
 
         // PUT: api/Rooms/5
@@ -43,16 +55,16 @@ namespace HotelApp.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRoom(int id, Room room)
         {
-            Room updated = await _room.UpdateRoom(id, room);   
+            Room updated = await _room.Update(id, room);
             return Ok(updated);
         }
 
         // POST: api/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("{name}/rooms/{layout}")]
-        public async Task<ActionResult<Room>> PostRoom(string name, int layout)
+        [HttpPost]
+        public async Task<ActionResult<Room>> PostRoom(Room room)
         {
-            await _room.CreateRoom( name,  layout);
+            await _room.Insert(room);
             return Ok();
         }
 
@@ -60,7 +72,7 @@ namespace HotelApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
-           await _room.DeleteRoom(id);
+            await _room.Delete(id);
 
             return NoContent();
         }
@@ -69,7 +81,7 @@ namespace HotelApp.Controllers
         [Route("{roomId}/Amenity/{amenityId}")]
         public async Task<ActionResult> PostAmenityIntoRoom(int roomId, int amenityId)
         {
-          await  _room.AddAmenityToRoom(roomId, amenityId);
+            await _room.AddAmenityToRoom(roomId, amenityId);
             return Ok();
         }
 
@@ -77,7 +89,7 @@ namespace HotelApp.Controllers
         [Route("{roomId}/Amenity/{amenityId}")]
         public async Task<ActionResult> DeleteAmentityFromRoom(int roomId, int amenityId)
         {
-           await  _room.RemoveAmentityFromRoom(roomId, amenityId);
+            await _room.RemoveAmentityFromRoom(roomId, amenityId);
             return NoContent();
         }
     }

@@ -13,6 +13,6 @@
         public string? Country { get; set; }
         public int Phone { get; set; }
 
-        public List<HotelRoom> HotelRooms { get; set; }
+        public List<HotelRoom>? HotelRooms { get; set; }
     }
 }

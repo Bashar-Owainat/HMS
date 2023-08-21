@@ -32,14 +32,16 @@ namespace HotelApp
                 options.User.RequireUniqueEmail = true;
                 
             })
- .AddEntityFrameworkStores<HotelDbContext>();
+            .AddEntityFrameworkStores<HotelDbContext>();
 
-            builder.Services.AddTransient<IUser, IdentityUserService>();
+
             builder.Services.AddTransient<IHotel, HotelServices>();
             builder.Services.AddTransient<IRoom, RoomServices>();
             builder.Services.AddTransient<IAmenity, AmenityServices>();
-            builder.Services.AddTransient<IHotelRoom, HotelRoomService>();
+            builder.Services.AddTransient<IGenericRepo<Amenity>, GenericRepo<Amenity>>();
+            builder.Services.AddTransient<IHotelRoom, HotelRoomServices>();
             builder.Services.AddScoped<JwtTokenService>();
+            builder.Services.AddTransient<IUser, IdentityUserService>();
 
             builder.Services.AddAuthentication(options =>
             {

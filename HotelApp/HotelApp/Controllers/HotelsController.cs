@@ -26,7 +26,7 @@ namespace HotelApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hotel>>> Gethotels()
         {
-            var hotels = await  _hotel.GetHotels();
+            var hotels = await  _hotel.GetAll();
             return Ok(hotels);
         }
 
@@ -34,7 +34,7 @@ namespace HotelApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Hotel>> GetHotel(int id)
         {
-          Hotel hotel = await _hotel.GetHotel(id);
+          Hotel hotel = await _hotel.GetById(id);
             return hotel;
         }
 
@@ -48,7 +48,7 @@ namespace HotelApp.Controllers
                 return BadRequest();
             }
 
-           var UpdatedHotel = await _hotel.UpdateHotel(id, hotel);
+           var UpdatedHotel = await _hotel.Update(id, hotel);
             return Ok(UpdatedHotel);
         }
 
@@ -57,7 +57,7 @@ namespace HotelApp.Controllers
         [HttpPost]
         public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
-         await _hotel.CreateHotel(hotel);
+         await _hotel.Insert(hotel);
             return hotel;
         }
 
@@ -65,7 +65,7 @@ namespace HotelApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteHotel(int id)
         {
-            await _hotel.DeleteHotel(id);
+            await _hotel.Delete(id);
             return NoContent();
         }
 
