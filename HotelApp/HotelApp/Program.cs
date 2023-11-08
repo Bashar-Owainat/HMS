@@ -34,6 +34,14 @@ namespace HotelApp
             })
             .AddEntityFrameworkStores<HotelDbContext>();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAnyOrigin",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    });
+            });
 
             builder.Services.AddTransient<IHotel, HotelServices>();
             builder.Services.AddTransient<IRoom, RoomServices>();
@@ -78,6 +86,7 @@ namespace HotelApp
             });
             var app = builder.Build();
 
+            app.UseCors("AllowAnyOrigin");
             app.UseAuthentication();
             app.UseAuthorization();
 
