@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelApp", "HotelApp\HotelA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudTests", "CrudTests\CrudTests.csproj", "{91483AA3-337E-4B4D-85D5-618BAF7815F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMS-MVC", "HMS-MVC\HMS-MVC.csproj", "{41DD2C3C-882E-4AF7-9B28-BA9518593779}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{91483AA3-337E-4B4D-85D5-618BAF7815F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91483AA3-337E-4B4D-85D5-618BAF7815F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91483AA3-337E-4B4D-85D5-618BAF7815F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{41DD2C3C-882E-4AF7-9B28-BA9518593779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41DD2C3C-882E-4AF7-9B28-BA9518593779}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41DD2C3C-882E-4AF7-9B28-BA9518593779}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41DD2C3C-882E-4AF7-9B28-BA9518593779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
